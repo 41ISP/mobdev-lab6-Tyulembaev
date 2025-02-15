@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Text, View } from 'react-native';
+import MainPage from './tabs/main';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -30,7 +31,7 @@ export default function RootLayout() {
 
   return (
     <View>
-      <Text>Hello world</Text>
+      <MainPage></MainPage>
     </View>
   );
 }
