@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, Button } from 'react-native';
 
 const MainPage = () => {
-    const [imageSrc, setImageSrc] = useState("../../../emptycat.jpg")
+    const [imageSrc, setImageSrc] = useState('../public/emptycat.jpg')
     const [catId, setCatId] = useState('')
     
     const [loading, setLoading] = useState(true) 
@@ -26,11 +26,8 @@ const MainPage = () => {
     {
         try{
             const randomCat = await CATApi.GetRandomCat();
-            
-            console.log(randomCat)
-
-            setCatId(randomCat._id);
-            const catUrl = await CATApi.GetPhotoOfCat(randomCat._id);
+            setCatId(randomCat.id);
+            const catUrl = await CATApi.GetPhotoOfCat(randomCat.id);
             // TODO а вдруг нам поподется одно и тоже два раза?????
             setImageSrc(catUrl);
             setLoading(false);
@@ -46,81 +43,77 @@ const MainPage = () => {
     }
     useEffect( () => {
         fetchImage();
+        console.log(imageSrc)
     },[]);
 
     
     if(error)
-        return (<View style={style.main_container}>
+        return (
+        <View style={style.main_container}>
             <Text>ERROR</Text>
-        </View>);
+        </View>
+        );
 
-    if(loading)
+     if(loading)
         return (        
         <View style={style.main_container}>
             <View style={style.body_container}>
-                <Image style={style.img} src={imageSrc}/>
+                <Image style={style.img} source={require("../assets/images/emptycat.jpg")}/>
                 <Text>Ищем кота для вас</Text>
             </View>
         </View>)
 
     return (
-        // <View style={style.main_container}>
-        //     <View style={style.topper_container}>
+        <View style={style.main_container}>
+            <View style={style.topper_container}>
+            <Image style={style.img} src={"https://cataas.com/cat/hsyTGG9ihjVVAbsC"}/>
+
                 
-        //     </View>
-        //     <View style={style.body_container}>
-        //         <Image style={style.img} src={imageSrc}/>
-        //         <LikedIcon id = {catId} liked={isLiked} onClick={onClickLikedIcon}/>
-        //         <Button onPress={handleNextButton} title='next'/>
-        //     </View>
-        // </View>
-        <Text>Hello world</Text>
+            </View>
+            <View style={style.body_container}>
+                <Image style={style.img} source={{uri: `${imageSrc}`}}/>
+                <LikedIcon id = {catId} liked={isLiked} onClick={onClickLikedIcon}/>
+                <Button onPress={handleNextButton} title='next'/>
+            </View>
+        </View>
     )
 }
 
 const style = StyleSheet.create({
-    main_container : {
-        display : 'flex',
-        flexDirection : 'column',
-        alignItems : 'center',
-        padding : 16,
-        backgroundColor : '#121212', 
-        color : '#FFFFFF', 
-        height : 100,
+    main_container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: 16,
+        backgroundColor: '#1а1e1e',
+        height: 720,
     },
-    topper_container : {
+    topper_container: {
         width: 100,
         height: 50,
-        backgroundColor: '#1e1e1e', /* Темный фон верхнего блока */
+        backgroundColor: '#1e1e1e', // Dark background for the top block
         borderRadius: 8,
     },
-
-    body_container : {
-        display: 'flex',
-        flexDirection : 'column',
+    body_container: {
+        flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        flexGrow: 2,
-        
+        justifyContent: 'center'
     },
-
-    img : {
-        maxWidth: 200,
-        maxHeight: 200,
+    img: {
+        maxWidth: 50, // Use percentage for responsive design
+        maxHeight: 50,
         height: 'auto',
         borderRadius: 8,
     },
-
-    button : {
+    button: {
         marginTop: 20,
-        paddingTop: 10,
-        paddingRight : 20,
+        paddingVertical: 10, 
+        paddingHorizontal: 20, 
         backgroundColor: '#bb86fc',
-        color: 'white',
+        color: 'white', 
         borderRadius: 5,
-        cursor: 'pointer',
+        alignItems: 'center', 
     }
-
 });
 export default MainPage;
 

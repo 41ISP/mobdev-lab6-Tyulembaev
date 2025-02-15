@@ -4,7 +4,7 @@ export interface ICat {
     updatedAt : string,
     mimetype : string,
     size: Number,
-    _id : string
+    id : string
 }
 
 export interface ICatImage{

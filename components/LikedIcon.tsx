@@ -16,7 +16,7 @@ const LikedIcon: React.FC<Props> = ({ id , liked, onClick}) => {
     
     return (
         <View>
-            <Image style={style.liked_image} src={liked ? "../../../liked.png": "../../../unliked.png"}/>
+            <Image style={style.liked_image} src={liked ? "../public/liked.png": "../public/unliked.png"}/>
             <TouchableOpacity
                 onPress={handleLiked}
                 style={{flex: 1}}>

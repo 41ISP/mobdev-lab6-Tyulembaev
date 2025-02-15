@@ -8,10 +8,7 @@ const CATApiInstanse = axios.create()
 const CATApi = {
     GetRandomCat: async () => {
         const response = await CATApiInstanse.get<ICat>("/cat",{
-            baseURL : BaseUrl,
-            params : {
-                json : true
-            }
+            baseURL : BaseUrl
         })
         return response.data;
     },
