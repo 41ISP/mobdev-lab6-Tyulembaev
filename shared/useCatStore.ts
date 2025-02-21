@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface CatState{
     catsId: string[],
@@ -22,5 +23,5 @@ export const useCatStore = create<CatState>()(
             return catsId.includes(id);
         }
     }),
-    {name:'catStore', version:1, storage:createJSONStorage(()=> localStorage)},
+    {name:'catStore', version:1, storage:createJSONStorage(()=> AsyncStorage)},
 ));

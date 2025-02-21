@@ -16,10 +16,10 @@ const LikedIcon: React.FC<Props> = ({ id , liked, onClick}) => {
     
     return (
         <View>
-            <Image style={style.liked_image} src={liked ? "../public/liked.png": "../public/unliked.png"}/>
             <TouchableOpacity
                 onPress={handleLiked}
                 style={{flex: 1}}>
+                <Image style={style.liked_image} source={liked ? require("../assets/images/liked.png") : require("../assets/images/unliked.png")}/>
             </TouchableOpacity>
         </View>
         
@@ -30,11 +30,9 @@ export default LikedIcon
 
 const style = StyleSheet.create({
     liked_image : {
-        maxWidth: 50,
-        maxHeight: 50,
-        width: 50,
-        height: 50,
-        padding: 10,
-        margin: 10,
+        width: 100,
+        height: 100,
+        backgroundColor: '#1F1F1F',
+        marginTop: '30%'
     }
 })
